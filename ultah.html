@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Alika! 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Baloo 2', cursive;
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(135deg, #E8D5FF 0%, #C4A3FF 50%, #A78BFA 100%);
+            position: relative;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .page.prev {
+            transform: translateX(-100%);
+        }
+
+        /* Halaman 1 - Ucapan Awal */
+        .page1 {
+            background: linear-gradient(135deg, #E8D5FF 0%, #DDD6FE 50%, #C4B5FD 100%);
+        }
+
+        .page1 h1 {
+            font-size: 2.5rem;
+            color: #6B46C1;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        .page1 p {
+            font-size: 1.3rem;
+            color: #7C3AED;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            max-width: 380px;
+        }
+
+        .page1 .extra-text {
+            font-size: 1.1rem;
+            color: #8B5CF6;
+            margin-bottom: 30px;
+            font-style: italic;
+            max-width: 350px;
+        }
+
+        /* Halaman 2 - Galeri Foto */
+        .page2 {
+            background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 50%, #DDD6FE 100%);
+        }
+
+        .photo-frame {
+            width: 250px;
+            height: 300px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            margin-bottom: 20px;
+            transform: rotate(-2deg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #DDD6FE, #C4B5FD);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .photo-caption {
+            color: #6B46C1;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .page2 h2 {
+            font-size: 2rem;
+            color: #6B46C1;
+            margin-bottom: 15px;
+        }
+
+        .page2 p {
+            font-size: 1.2rem;
+            color: #7C3AED;
+            margin-bottom: 15px;
+            max-width: 320px;
+            line-height: 1.5;
+        }
+
+        .page2 .extra-text {
+            font-size: 1rem;
+            color: #8B5CF6;
+            margin-bottom: 25px;
+            font-style: italic;
+            max-width: 300px;
+        }
+
+        /* Halaman 3 & 4 - Bunga & Kue */
+        .page3, .page4 {
+            background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 50%, #E9D5FF 100%);
+        }
+
+        .page3 h2, .page4 h2 {
+            font-size: 2.2rem;
+            color: #6B46C1;
+            margin-bottom: 20px;
+        }
+
+        .page3 p, .page4 p {
+            font-size: 1.2rem;
+            color: #7C3AED;
+            margin-bottom: 20px;
+            max-width: 350px;
+            line-height: 1.5;
+        }
+
+        .page3 .extra-text, .page4 .extra-text {
+            font-size: 1rem;
+            color: #8B5CF6;
+            margin-bottom: 30px;
+            font-style: italic;
+            max-width: 320px;
+        }
+
+        .flower-container, .cake-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .flower-display, .cake-display {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        .flower-photo-frame, .cake-photo-frame {
+            width: 200px;
+            height: 160px;
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+            margin-bottom: 15px;
+            transform: rotate(1deg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .flower-photo-placeholder, .cake-photo-placeholder {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(45deg, #F8FAFC, #E2E8F0);
+            border: 2px dashed #C4B5FD;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #8B5CF6;
+            margin-bottom: 8px;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .flower-photo-placeholder img, .cake-photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .flower-photo-placeholder.has-image, .cake-photo-placeholder.has-image {
+            background: none;
+            border: none;
+            color: transparent;
+        }
+
+         .photo-photo-frame {
+    width: 300px;
+    background: white;
+    border-radius: 30px;
+    padding: 15px;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+    margin-bottom: 15px;
+    transform: rotate(1deg);
+    animation: float 3s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* 3:4 cocok buat foto portrait */
+    background: linear-gradient(45deg, #F8FAFC, #E2E8F0);
+    border: 2px dashed #C4B5FD;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.photo-photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* tampil penuh, tanpa melar aneh */
+    border-radius: 8px;
+}
+
+.photo-photo-caption {
+    color: #6B46C1;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 8px;
+}
+        .photo-photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .photo-photo-caption {
+            color: #6B46C1;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .flower-photo-caption, .cake-photo-caption {
+            color: #6B46C1;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Tombol */
+        .btn {
+            background: linear-gradient(45deg, #8B5CF6, #A78BFA);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Baloo 2', cursive;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(139, 92, 246, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+
+        /* Animasi */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: rotate(-2deg) translateY(0px); }
+            50% { transform: rotate(-2deg) translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Confetti & Balon */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #F59E0B;
+            animation: fall 3s infinite linear;
+        }
+
+        .confetti:nth-child(2) { background: #EF4444; left: 20%; animation-delay: 0.5s; }
+        .confetti:nth-child(3) { background: #10B981; left: 40%; animation-delay: 1s; }
+        .confetti:nth-child(4) { background: #3B82F6; left: 60%; animation-delay: 1.5s; }
+        .confetti:nth-child(5) { background: #8B5CF6; left: 80%; animation-delay: 2s; }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 2rem;
+            animation: float-balloon 4s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .balloon:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .balloon:nth-child(3) { bottom: 20%; left: 5%; animation-delay: 2s; }
+
+        @keyframes float-balloon {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 480px) {
+    .photo-photo-placeholder {
+        height: 220px;
+    }
+}
+         
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .page1 h1 { font-size: 2rem; }
+            .page1 p, .page2 p, .page3 p, .page4 p { font-size: 1.1rem; }
+            .page1 .extra-text, .page2 .extra-text, .page3 .extra-text, .page4 .extra-text { font-size: 0.95rem; }
+            .page2 h2, .page3 h2, .page4 h2 { font-size: 1.8rem; }
+            .photo-frame { width: 200px; height: 250px; padding: 15px; }
+            .flower-display, .cake-display { font-size: 4rem; }
+            .flower-photo-frame, .cake-photo-frame { width: 180px; height: 140px; padding: 12px; }
+            .flower-photo-placeholder, .cake-photo-placeholder { height: 80px; font-size: 0.8rem; }
+            .btn { padding: 12px 25px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio untuk musik -->
+    <audio id="birthdayMusic" loop>
+        <source src="https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.4/Pizzicato.min.js" type="audio/mpeg">
+    </audio>
+
+    <!-- Dekorasi -->
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+
+    <!-- Halaman 1 - Ucapan Awal -->
+    <div class="page page1 active" id="page1">
+        <h1>🎉 Hai Alika! 🎉</h1>
+        <p>Hari ini kamu resmi jadi lebih manis satu tahun lagi! Siap untuk kejutan spesial? 🎂✨</p>
+        <p class="extra-text">Kamu tahu nggak sih? Setiap tahun berlalu, kamu jadi makin cantik dan makin pintar! Hari ini adalah hari istimewa untuk merayakan betapa luar biasanya kamu! 💕</p>
+        <button class="btn" onclick="goToPage(2)">Yuk Lanjut! 👉</button>
+    </div>
+
+    <!-- Halaman 2 - Galeri Foto -->
+<div class="page page2" id="page2">
+    <h2>📸 Galeri Alika 📸</h2>
+
+    <div class="photo-frame">
+        <div class="photo-photo-placeholder" id="photoAlika">
+            <div class="flower-photo-placeholder" id="flowerPhoto"></div>
+            <img src="/image/lika2.jpg" alt="Foto Alika">
+            Tempat foto Alika 📸
+        </div>
+        <div class="photo-caption">Alika si Cantik! 💕</div>
+    </div> 
+    <p>Lihat deh! Cantiknya siapa nih? Alika versi dewasa yang ngangenin banget! 🥰📸</p>
+    <p class="extra-text">Dari kecil udah keliatan banget kalau kamu bakal jadi gadis yang luar biasa. Senyum kamu itu selalu bikin semua orang bahagia! ✨</p>
+    <button class="btn" onclick="goToPage(3)">Lanjut ke bunga cantik 🌸</button>
+</div>
+
+
+    <!-- Halaman 3 - Bunga Spesial -->  
+    <div class="page page3" id="page3">
+        <h2>🌸 Bunga Cantik untuk Alika 🌸</h2>
+        <div class="flower-container">
+            <div class="flower-display">🌺</div>
+            <div class="flower-photo-frame">
+                <div class="flower-photo-placeholder" id="flowerPhoto">
+                    <img src="/image/teratai_ungu.jpeg" alt="Kue untuk Alika">
+                    Tempat foto bunga untuk Alika 📸
+                </div>
+                <div class="flower-photo-caption">Bunga untuk Alika! 💐</div>
+            </div>
+        </div>
+        <p>Ini dia buket bunga spesial untuk gadis cantik bernama Alika! 🌹💐</p>
+        <p class="extra-text">Seperti bunga-bunga ini, kamu juga tumbuh dengan indah setiap harinya. Wangi dan cantiknya bunga ini nggak ada apa-apanya dibanding kebaikan hati kamu! 🌺</p>
+        <button class="btn" onclick="goToPage(4)">Sekarang lihat kue! 🎂</button>
+    </div>
+
+    <!-- Halaman 4 - Kue Ulang Tahun -->
+    <div class="page page4" id="page4">
+        <h2>🎂 Kue Istimewa untuk Alika 🎂</h2>
+        <div class="cake-container">
+            <div class="cake-display">🎂</div>
+            <div class="cake-photo-frame">
+                <div class="cake-photo-placeholder" id="cakePhoto">
+                   <img src="/image/kue.jpeg" alt="Kue untuk Alika">
+                    Tempat foto kue untuk Alika 📸
+                </div>
+                <div class="cake-photo-caption">Kue untuk Alika! 🍰</div>
+            </div>
+        </div>
+        <p>Tadaaa! Ini kue ulang tahun spesial buat Alika yang manis! 🍰🎂</p>
+        <p class="extra-text">Kue ini semanis kamu, tapi tetap aja kamu lebih manis! Tiup lilinnya dan buat wish yang indah ya! Semoga semua impian kamu terwujud! ✨🕯️</p>
+        <button class="btn" onclick="goToPage(1)">Ulang dari Awal 🔁</button>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let musicStarted = false;
+
+        // Simulasi musik dengan beep ringan
+        function playBirthdayMusic() {
+            if (!musicStarted) {
+                // Buat konteks audio untuk simulasi musik
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Melodi "Happy Birthday" sederhana
+                const notes = [
+                    { freq: 262, duration: 500 }, // C
+                    { freq: 262, duration: 500 }, // C
+                    { freq: 294, duration: 1000 }, // D
+                    { freq: 262, duration: 1000 }, // C
+                    { freq: 349, duration: 1000 }, // F
+                    { freq: 330, duration: 2000 }, // E
+                ];
+                
+                let currentTime = audioContext.currentTime;
+                
+                function playNote(frequency, duration) {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = frequency;
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0.1, currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + duration / 1000);
+                    
+                    oscillator.start(currentTime);
+                    oscillator.stop(currentTime + duration / 1000);
+                    
+                    currentTime += duration / 1000;
+                }
+                
+                // Mainkan melodi
+                notes.forEach(note => {
+                    playNote(note.freq, note.duration);
+                });
+                
+                // Ulangi setiap 8 detik
+                setInterval(() => {
+                    let time = audioContext.currentTime;
+                    notes.forEach(note => {
+                        const osc = audioContext.createOscillator();
+                        const gain = audioContext.createGain();
+                        osc.connect(gain);
+                        gain.connect(audioContext.destination);
+                        osc.frequency.value = note.freq;
+                        osc.type = 'sine';
+                        gain.gain.setValueAtTime(0.05, time);
+                        gain.gain.exponentialRampToValueAtTime(0.01, time + note.duration / 1000);
+                        osc.start(time);
+                        osc.stop(time + note.duration / 1000);
+                        time += note.duration / 1000;
+                    });
+                }, 8000);
+                
+                musicStarted = true;
+            }
+        }
+
+        function goToPage(pageNumber) {
+            // Mulai musik saat tombol pertama ditekan
+            if (!musicStarted) {
+                playBirthdayMusic();
+            }
+            
+            // Sembunyikan halaman saat ini
+            const currentPageEl = document.getElementById(`page${currentPage}`);
+            currentPageEl.classList.remove('active');
+            currentPageEl.classList.add('prev');
+            
+            // Tampilkan halaman baru
+            setTimeout(() => {
+                currentPageEl.classList.remove('prev');
+                const newPageEl = document.getElementById(`page${pageNumber}`);
+                newPageEl.classList.add('active');
+                currentPage = pageNumber;
+            }, 200);
+        }
+
+        // Animasi confetti yang jatuh terus menerus
+        function createConfetti() {
+            const colors = ['#F59E0B', '#EF4444', '#10B981', '#3B82F6', '#8B5CF6', '#EC4899'];
+            
+            setInterval(() => {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }, 500);
+        }
+
+        // Auto-detect dan style foto yang dimasukkan
+        function setupPhotoContainers() {
+            const flowerContainer = document.getElementById('flowerPhoto');
+            const cakeContainer = document.getElementById('cakePhoto');
+            
+            // Check jika ada img di dalam container
+            const checkAndStyleImage = (container) => {
+                const img = container.querySelector('img');
+                if (img) {
+                    container.classList.add('has-image');
+                    img.onload = () => {
+                        // Foto berhasil dimuat
+                        console.log('Foto berhasil dimuat');
+                    };
+                    img.onerror = () => {
+                        // Jika foto gagal dimuat, kembalikan ke placeholder
+                        container.classList.remove('has-image');
+                        container.innerHTML = container.id === 'flowerPhoto' ? 
+                            'Tempat foto bunga untuk Alika 📸' : 
+                            'Tempat foto kue untuk Alika 📸';
+                    };
+                }
+            };
+            
+            // Setup observer untuk mendeteksi perubahan
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        checkAndStyleImage(mutation.target);
+                    }
+                });
+            });
+            
+            // Observe kedua container
+            [flowerContainer, cakeContainer].forEach(container => {
+                if (container) {
+                    checkAndStyleImage(container);
+                    observer.observe(container, { childList: true, subtree: true });
+                }
+            });
+        }
+        
+        // Mulai animasi confetti
+        createConfetti();
+        
+        // Setup photo containers
+        setupPhotoContainers();
+
+        // Tambahkan efek klik yang menyenangkan
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn')) {
+                // Buat efek burst
+                for (let i = 0; i < 6; i++) {
+                    const spark = document.createElement('div');
+                    spark.style.position = 'absolute';
+                    spark.style.left = e.clientX + 'px';
+                    spark.style.top = e.clientY + 'px';
+                    spark.style.width = '4px';
+                    spark.style.height = '4px';
+                    spark.style.background = '#F59E0B';
+                    spark.style.borderRadius = '50%';
+                    spark.style.pointerEvents = 'none';
+                    spark.style.animation = `burst${i} 0.6s ease-out forwards`;
+                    document.body.appendChild(spark);
+                    
+                    setTimeout(() => spark.remove(), 600);
+                }
+            }
+        });
+
+        // CSS untuk animasi burst
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes burst0 { to { transform: translate(20px, -20px); opacity: 0; } }
+            @keyframes burst1 { to { transform: translate(-20px, -20px); opacity: 0; } }
+            @keyframes burst2 { to { transform: translate(20px, 20px); opacity: 0; } }
+            @keyframes burst3 { to { transform: translate(-20px, 20px); opacity: 0; } }
+            @keyframes burst4 { to { transform: translate(30px, 0px); opacity: 0; } }
+            @keyframes burst5 { to { transform: translate(-30px, 0px); opacity: 0; } }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
